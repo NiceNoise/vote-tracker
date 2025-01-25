@@ -3,6 +3,7 @@ const voteForm = document.getElementById("vote-form");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const productsContainer = document.getElementById("products-container");
+const btnRefresh= document.getElementById("btn-refresh");
 
 let selectedItem = null;
 
@@ -39,6 +40,9 @@ function renderProducts() {
   // esta funcion retorna 3 productos al azar
   const randomProducts = getRandomProducts();
 
+  // limpiamos el contenedor de productos
+    productsContainer.innerHTML = "";
+
   // iteramos la lista de productos
   for (let randomProduct of randomProducts) {
     // luego creamos la ui
@@ -59,6 +63,8 @@ function renderProducts() {
 }
 
 renderProducts();
+
+btnRefresh.addEventListener("click", renderProducts)
 
 function addTooltipToDiv(product) {
   const description = product.dataset.description;
@@ -112,6 +118,7 @@ function createContentModal(product) {
   const btnContinue = document.createElement("button");
   btnContinue.textContent = "Continuar";
   btnContinue.classList.add("btn-modal");
+  btnContinue.addEventListener("click", continueVote);
 
   const btnClose = document.createElement("button");
   btnClose.textContent = "Cerrar";
@@ -127,6 +134,11 @@ function createContentModal(product) {
   modalContent.appendChild(btnContinue);
 
   modal.appendChild(modalContent);
+}
+
+function continueVote(){
+  closeModal();
+  renderProducts();
 }
 
 voteForm.addEventListener("submit", function (event) {
