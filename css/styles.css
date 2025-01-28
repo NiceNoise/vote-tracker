@@ -189,6 +189,10 @@ main {
   cursor: no-drop !important;
 }
 
+#btn-refresh {
+  
+}
+
 footer {
   padding: var(--spacing-medium);
   height: var(--footer-height);
